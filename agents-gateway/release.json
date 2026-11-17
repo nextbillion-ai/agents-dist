@@ -1,10 +1,10 @@
 {
-  "rev": "f0d066ba9d9e749b478f4e1de042541f1a2404c2",
-  "version": "f0d066ba9d9e",
-  "url": "https://github.com/nextbillion-ai/agents-dist/releases/download/agents-gateway-f0d066ba9d9e/agents-gateway-linux-amd64",
-  "hash": "sha256-YchAXBm0wk6149xS3tHAwxDZeYIDKSAt0u1gnNmYBUc=",
+  "rev": "c627e918c6616fb7b86350a3b64ca2e27191eefd",
+  "version": "c627e918c661",
+  "url": "https://github.com/nextbillion-ai/agents-dist/releases/download/agents-gateway-c627e918c661/agents-gateway-linux-amd64",
+  "hash": "sha256-qGbHYoRMu1nWUEBht+y52O6rmt6nWMyPqEpi35PnEsw=",
   "darwin_arm64": {
-    "url": "https://github.com/nextbillion-ai/agents-dist/releases/download/agents-gateway-f0d066ba9d9e/agents-gateway-darwin-arm64",
-    "hash": "sha256-1Lwdxoj+loQJl0xfbRCtegtijwHVk5l8qysBx0WkAhY="
+    "url": "https://github.com/nextbillion-ai/agents-dist/releases/download/agents-gateway-c627e918c661/agents-gateway-darwin-arm64",
+    "hash": "sha256-d1OI2/7E0nZXO4UhZCLFxqRLbFPibbChPeyWtGzaAss="
   }
 }

@@ -12,6 +12,9 @@
 # hash). Rerun it to upgrade. Settings are the variables below; override one
 # with e.g. `sudo AGENT_USER=other bash install-macos.sh`.
 set -euo pipefail
+# sudo keeps a stricter umask of the admin's (e.g. 077), which would make
+# the directories created below unreadable to the service and the agents.
+umask 022
 
 SERVICE=${SERVICE:-nextbillion-agents-gateway}  # account _$SERVICE, launchd label ai.nextbillion.agents-gateway
 AGENT_USER=${AGENT_USER:-raft-nextbillion}     # the account the agents run as
@@ -87,7 +90,9 @@ if ! id "$ACCOUNT" >/dev/null 2>&1; then
 fi
 
 say "Installing to $PREFIX"
-install -d -m 755 -o root -g wheel "$PREFIX" "$PREFIX/bin" "$PREFIX/libexec" /usr/local/var/lib /usr/local/var/run /usr/local/var/log
+install -d -m 755 -o root -g wheel "$PREFIX" "$PREFIX/bin" "$PREFIX/libexec" /usr/local/var /usr/local/var/lib /usr/local/var/run /usr/local/var/log
+# Also when an earlier run (or another installer) made them with a stricter mode.
+chmod 755 /usr/local/var /usr/local/var/lib /usr/local/var/run /usr/local/var/log
 install -m 755 -o root -g wheel "$tmp/agents-gateway" "$PREFIX/bin/agents-gateway"
 install -d -m 700 -o "$ACCOUNT" -g "$ACCOUNT" "$STATE"
 install -d -m 755 -o "$ACCOUNT" -g "$ACCOUNT" "$RUN"
