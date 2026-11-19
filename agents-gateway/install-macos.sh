@@ -161,6 +161,15 @@ plutil -lint "$tmp/plist" >/dev/null
 install -m 644 -o root -g wheel "$tmp/plist" "$PLIST"
 
 launchctl bootout "system/$LABEL" 2>/dev/null || true
+# bootout returns before the old job is gone; bootstrapping it meanwhile
+# fails with "Bootstrap failed: 5: Input/output error" (the first upgrade
+# on macmini-singapore, 2026-11-19).
+for _ in $(seq 1 20); do
+  launchctl print "system/$LABEL" >/dev/null 2>&1 || break
+  sleep 0.5
+done
+! launchctl print "system/$LABEL" >/dev/null 2>&1 ||
+  die "the old daemon is still loaded; rerun the installer in a moment"
 if [ ! -s "$KEY" ]; then
   cat <<NEXT
 
